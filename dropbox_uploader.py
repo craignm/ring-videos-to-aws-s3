@@ -4,11 +4,11 @@ import os
 
 class DropboxUploader:
     dbx = None
-    root_directory = None
+#    root_directory = None
 
-    def __init__(self, token, root_dir):
+    def __init__(self, token):
         self.dbx = dropbox.Dropbox(token)
-        self.root_directory = root_dir
+        self.root_directory = "/"
 
     def file_exists(self, filepath):
         try:
@@ -19,7 +19,7 @@ class DropboxUploader:
             return False
 
     def upload_file(self, filepath, file_destination):
-        f = open(filepath)
+        f = open(filepath, "rb")
         file_size = os.path.getsize(filepath)
         file_destination = os.path.join(self.root_directory, file_destination)
 
